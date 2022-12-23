@@ -23,17 +23,16 @@
       className: 'container',
       children: 'Hello World',
     }) */
-
-    // 💰 there are a few subtle differences between JSX and HTML. One such
-    // difference is how you apply a class to an element in JSX is by using
-    // `className` rather than `class`!
-    // 📜 You can learn the differences between JSX and HTML syntax from the React docs here:
-    // https://reactjs.org/docs/dom-elements.html#differences-in-attributes
-
+    /* 
     const className = 'container'
     const children = 'Hello World'
-    const element2 = <div className={className}>{children}</div>
+    const element2 = <div className={className}>{children}</div> */
 
-    ReactDOM.createRoot(document.getElementById('root')).render(element2)
+    const children = 'Hello World'
+    const className = 'container'
+    const props = {children, className}
+    const element3 = <div {...props} />
+
+    ReactDOM.createRoot(document.getElementById('root')).render(element3)
   </script>
 </body>
