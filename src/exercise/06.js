@@ -6,20 +6,18 @@ import * as React from 'react'
 function UsernameForm({onSubmitUsername}) {
   // 📜 https://developer.mozilla.org/en-US/docs/Web/API/Event/preventDefault
 
-  const [error, setError] = React.useState(null)
+  const [userData, setUserData] = React.useState('')
 
   const usernameInputRef = React.useRef()
 
   const handleSubmit = event => {
     event.preventDefault()
-    const data = usernameInputRef.current.value
-    onSubmitUsername(data)
+    onSubmitUsername(userData)
   }
 
   const handleChange = event => {
     const {value} = event.target
-    const isValid = value === value.toLowerCase()
-    setError(isValid ? null : 'Username must be lower case')
+    setUserData(value.toLowerCase())
   }
 
   return (
@@ -32,12 +30,10 @@ function UsernameForm({onSubmitUsername}) {
           id="userName"
           name="username"
           onChange={handleChange}
+          value={userData}
         />
       </div>
-      <div style={{color: 'red'}}>{error}</div>
-      <button disabled={Boolean(error)} type="submit">
-        Submit
-      </button>
+      <button type="submit">Submit</button>
     </form>
   )
 }
