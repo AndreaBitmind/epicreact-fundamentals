@@ -2,10 +2,11 @@
 // http://localhost:3000/isolated/exercise/06.js
 
 import * as React from 'react'
-import {useRef} from 'react'
 
 function UsernameForm({onSubmitUsername}) {
   // 📜 https://developer.mozilla.org/en-US/docs/Web/API/Event/preventDefault
+
+  const [error, setError] = React.useState(null)
 
   const usernameInputRef = React.useRef()
 
@@ -13,6 +14,12 @@ function UsernameForm({onSubmitUsername}) {
     event.preventDefault()
     const data = usernameInputRef.current.value
     onSubmitUsername(data)
+  }
+
+  const handleChange = event => {
+    const {value} = event.target
+    const isValid = value === value.toLowerCase()
+    setError(isValid ? null : 'Username must be lower case')
   }
 
   return (
@@ -24,9 +31,13 @@ function UsernameForm({onSubmitUsername}) {
           type="text"
           id="userName"
           name="username"
+          onChange={handleChange}
         />
       </div>
-      <button type="submit">Submit</button>
+      <div style={{color: 'red'}}>{error}</div>
+      <button disabled={Boolean(error)} type="submit">
+        Submit
+      </button>
     </form>
   )
 }
